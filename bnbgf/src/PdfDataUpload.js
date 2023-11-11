@@ -23,45 +23,42 @@ const PdfDataUpload = () => {
   };
 
   return (
-    <div className="mt-5">
-      <input
-        type="file"
-        accept=".pdf"
-        onChange={handleFileChange}
-        className="block w-full text-sm text-gray-500
-                   file:mr-4 file:py-2 file:px-4
-                   file:border-0 file:text-sm file:font-semibold
-                   file:bg-blue-50 file:text-blue-700
-                   hover:file:bg-blue-100"
-      />
-      {file && (
-        <div>
-          <div className="flex justify-between mt-5">
-            <button
-              disabled={pageNumber <= 1}
-              onClick={() => setPageNumber(pageNumber - 1)}
-            >
-              Previous
-            </button>
-            <p>
-              Page {pageNumber} of {numPages}
-            </p>
-            <button
-              disabled={pageNumber >= numPages}
-              onClick={() => setPageNumber(pageNumber + 1)}
-            >
-              Next
-            </button>
-          </div>
-          <Document
-            file={file}
-            onLoadSuccess={onDocumentLoadSuccess}
-            className="mt-5"
-          >
-            <Page pageNumber={pageNumber} renderTextLayer={false} />
-          </Document>
-        </div>
-      )}
+    <div className="mt-5 flex">
+      <div className="w-1/2 flex flex-col items-start ml-2">
+        <input
+          type="file"
+          accept=".pdf"
+          onChange={handleFileChange}
+          className="mb-2"
+        />
+        {file && (
+          <>
+            <div className="flex items-center mb-2">
+              <button
+                disabled={pageNumber <= 1}
+                onClick={() => setPageNumber(pageNumber - 1)}
+                className="ml-2"
+              >
+                Previous
+              </button>
+              <p className="mx-2">
+                Page {pageNumber} of {numPages}
+              </p>
+              <button
+                disabled={pageNumber >= numPages}
+                onClick={() => setPageNumber(pageNumber + 1)}
+                className="ml-auto w-max"
+              >
+                Next
+              </button>
+            </div>
+            <Document file={file} onLoadSuccess={onDocumentLoadSuccess}>
+              <Page pageNumber={pageNumber} renderTextLayer={false} />
+            </Document>
+          </>
+        )}
+      </div>
+      <div className="w-1/2">{/* Other content or empty space */}</div>
     </div>
   );
 };
