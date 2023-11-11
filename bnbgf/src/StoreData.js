@@ -2,6 +2,7 @@ import { useState } from "react";
 import TextDataUpload from "./TextDataUpload"; // Subcomponent for text data upload
 import ImageDataUpload from "./ImageDataUpload"; // Subcomponent for image data upload
 import Navbar from "./Navbar";
+import PdfDataUpload from "./PdfDataUpload";
 
 const StoreData = () => {
   const [dataType, setDataType] = useState(null);
@@ -23,8 +24,16 @@ const StoreData = () => {
           Store Image Data
         </button>
 
+        <button
+          onClick={() => setDataType("pdf")}
+          className="bg-red-500 text-white p-2 m-2"
+        >
+          Store Pdf Data
+        </button>
+
         {dataType === "text" && <TextDataUpload />}
         {dataType === "image" && <ImageDataUpload />}
+        {dataType === "pdf" && <PdfDataUpload />}
       </div>
     </div>
   );
