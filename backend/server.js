@@ -15,16 +15,37 @@ app.post("/upload", upload.single("image"), async (req, res) => {
     // Process and blur image with sharp
     console.log("Image processing.......");
 
-    const blurredImage = await sharp(req.file.buffer)
-      .blur(10) // Apply blur - adjust value as needed
+    // Load the image with Sharp
+    const image = sharp(req.file.buffer);
+
+    // Get metadata to calculate dimensions
+    const metadata = await image.metadata();
+    const halfWidth = Math.floor(metadata.width / 2);
+    const height = metadata.height;
+
+    // Create the cropped and blurred left half
+    const blurredLeftHalf = await image
+      .extract({ left: 0, top: 0, width: halfWidth, height: height })
+      .blur(50)
       .toBuffer();
-    console.log("Image blurred. Saving.........");
+
+    // Composite the blurred left half over the original image
+    const finalImage = await sharp(req.file.buffer)
+      .composite([{ input: blurredLeftHalf, top: 0, left: 0 }])
+      .toBuffer();
+
     // Dummy code to save original and blurred images
     saveFile(req.file.buffer, "original"); // Save original
-    saveFile(blurredImage, "blurred"); // Save blurred
+    saveFile(finalImage, "blurred"); // Save blurred
+
+    // Send the final image
+    res.writeHead(200, {
+      "Content-Type": "image/jpeg",
+      "Content-Length": finalImage.length,
+    });
+    res.end(finalImage);
 
     // Respond with a success message and a new file
-    res.status(200).send(blurredImage);
     console.log("SUCCESS!");
   } catch (error) {
     console.error(error);
