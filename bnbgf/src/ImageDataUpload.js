@@ -17,6 +17,10 @@ const ImageDataUpload = () => {
     }
   };
 
+  const handlePublish = async () => {
+    console.log("Publishing.....");
+  };
+
   const handleBlur = async () => {
     const formData = new FormData();
     formData.append("image", selectedFile);
@@ -46,17 +50,38 @@ const ImageDataUpload = () => {
         type="file"
         accept="image/*"
         onChange={handleImageChange}
-        className="..."
+        className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
       />
       {imagePreview && (
         <>
-          <img src={imagePreview} alt="Preview" className="..." />
-          <button onClick={handleBlur} className="...">
+          <img
+            src={imagePreview}
+            alt="Preview"
+            className="mt-3 max-w-xs max-h-64"
+          />
+          <button
+            onClick={handleBlur}
+            className="mt-2 py-2 px-4 bg-green-500 text-white font-bold rounded hover:bg-green-600"
+          >
             Blur
           </button>
         </>
       )}
-      {blurredImage && <img src={blurredImage} alt="Blurred" className="..." />}
+      {blurredImage && (
+        <>
+          <img
+            src={blurredImage}
+            alt="Blurred"
+            className="mt-3 max-w-xs max-h-64"
+          />
+          <button
+            onClick={handlePublish}
+            className="mt-2 py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600"
+          >
+            Publish
+          </button>
+        </>
+      )}
     </div>
   );
 };
