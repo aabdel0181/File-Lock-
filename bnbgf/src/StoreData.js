@@ -1,7 +1,6 @@
 import { useState } from "react";
 import TextDataUpload from "./TextDataUpload"; // Subcomponent for text data upload
 import ImageDataUpload from "./ImageDataUpload"; // Subcomponent for image data upload
-import Navbar from "./Navbar";
 import PdfDataUpload from "./PdfDataUpload";
 
 const StoreData = () => {
@@ -9,7 +8,6 @@ const StoreData = () => {
 
   return (
     <div>
-      <Navbar />
       <div className="p-4">
         <button
           onClick={() => setDataType("text")}

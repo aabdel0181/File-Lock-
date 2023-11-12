@@ -6,7 +6,7 @@ const Marketplace = () => {
 
   return (
     <div>
-      <Navbar />
+
       <div className="p-4">
         {/* Marketplace content here */}
         <p>Marketplace content will be displayed here.</p>
