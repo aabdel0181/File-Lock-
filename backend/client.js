@@ -3,7 +3,7 @@ const { ACCOUNT_ADDRESS, ACCOUNT_PRIVATEKEY } = require("./env");
 
 const client = Client.create(
   "https://gnfd-testnet-fullnode-tendermint-ap.bnbchain.org",
-  "greenfield_5600-1"
+  "5600"
 );
 
 const getSps = async () => {
