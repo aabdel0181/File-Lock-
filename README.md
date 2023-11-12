@@ -23,7 +23,7 @@ This decentralized app allows users to securely store data like images, PDFs, an
 - MetaMask - Ethereum/BNB wallet & authentication
 - Web3.js - Blockchain/wallet integration
 
-## Running the Dapp
+## Running the Dapp (windows) 
 
 
 1. Start the Express server
