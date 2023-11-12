@@ -2,5 +2,11 @@
   "devDependencies": {
     "@nomicfoundation/hardhat-toolbox": "^3.0.0",
     "hardhat": "^2.19.0"
+  },
+  "dependencies": {
+    "@bnb-chain/greenfield-contracts": "^1.0.0",
+    "@bnb-chain/greenfield-contracts-sdk": "^1.0.0",
+    "@openzeppelin/contracts": "^4.9.0",
+    "ethereum-waffle": "^4.0.10"
   }
 }

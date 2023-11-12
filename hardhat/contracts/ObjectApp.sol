@@ -46,8 +46,8 @@ abstract contract ObjectApp is BaseApp, ObjectStorage {
         uint256 resourceId,
         bytes calldata callbackData
     ) external virtual override {
-        require(msg.sender == objectHub, string.concat("ObjectApp: ", ERROR_INVALID_CALLER));
-        require(resourceType == RESOURCE_OBJECT, string.concat("ObjectApp: ", ERROR_INVALID_RESOURCE));
+        require(msg.sender == objectHub, "");
+        require(resourceType == RESOURCE_OBJECT, "");
 
         _objectGreenfieldCall(status, operationType, resourceId, callbackData);
     }
@@ -66,7 +66,7 @@ abstract contract ObjectApp is BaseApp, ObjectStorage {
         if (operationType == TYPE_DELETE) {
             _deleteObjectCallback(status, resourceId, callbackData);
         } else {
-            revert(string.concat("ObjectApp: ", ERROR_INVALID_OPERATION));
+            revert("");
         }
     }
 
@@ -91,7 +91,7 @@ abstract contract ObjectApp is BaseApp, ObjectStorage {
      */
     function _deleteObject(uint256 _tokenId) internal virtual {
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("ObjectApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IObjectHub(objectHub).deleteObject{value: msg.value}(_tokenId);
     }
 
@@ -115,7 +115,7 @@ abstract contract ObjectApp is BaseApp, ObjectStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("ObjectApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IObjectHub(objectHub).deleteObject{value: msg.value}(_tokenId, _callbackGasLimit, _extraData);
     }
 

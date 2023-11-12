@@ -54,8 +54,8 @@ abstract contract BucketApp is BaseApp, BucketStorage {
         uint256 resourceId,
         bytes calldata callbackData
     ) external virtual override {
-        require(msg.sender == bucketHub, string.concat("BucketApp: ", ERROR_INVALID_CALLER));
-        require(resourceType == RESOURCE_BUCKET, string.concat("BucketApp: ", ERROR_INVALID_RESOURCE));
+        require(msg.sender == bucketHub, "");
+        require(resourceType == RESOURCE_BUCKET, "");
 
         _bucketGreenfieldCall(status, operationType, resourceId, callbackData);
     }
@@ -76,7 +76,7 @@ abstract contract BucketApp is BaseApp, BucketStorage {
         } else if (operationType == TYPE_DELETE) {
             _deleteBucketCallback(status, resourceId, callbackData);
         } else {
-            revert(string.concat("BucketApp: ", ERROR_INVALID_OPERATION));
+            revert("");
         }
     }
 
@@ -123,7 +123,7 @@ abstract contract BucketApp is BaseApp, BucketStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("BucketApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IBucketHub(bucketHub).createBucket{value: msg.value}(createPkg);
     }
 
@@ -167,7 +167,7 @@ abstract contract BucketApp is BaseApp, BucketStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("BucketApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IBucketHub(bucketHub).createBucket{value: msg.value}(createPkg, _callbackGasLimit, _extraData);
     }
 
@@ -178,7 +178,7 @@ abstract contract BucketApp is BaseApp, BucketStorage {
      */
     function _deleteBucket(uint256 _tokenId) internal virtual {
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("BucketApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee,"");
         IBucketHub(bucketHub).deleteBucket{value: msg.value}(_tokenId);
     }
 
@@ -202,7 +202,7 @@ abstract contract BucketApp is BaseApp, BucketStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("BucketApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IBucketHub(bucketHub).deleteBucket{value: msg.value}(_tokenId, _callbackGasLimit, _extraData);
     }
 

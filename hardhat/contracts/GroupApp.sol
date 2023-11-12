@@ -51,8 +51,8 @@ abstract contract GroupApp is BaseApp, GroupStorage {
         uint256 resourceId,
         bytes calldata callbackData
     ) external virtual override {
-        require(msg.sender == groupHub, string.concat("GroupApp: ", ERROR_INVALID_CALLER));
-        require(resourceType == RESOURCE_GROUP, string.concat("GroupApp: ", ERROR_INVALID_RESOURCE));
+        require(msg.sender == groupHub, "");
+        require(resourceType == RESOURCE_GROUP, "");
 
         _groupGreenfieldCall(status, operationType, resourceId, callbackData);
     }
@@ -75,7 +75,7 @@ abstract contract GroupApp is BaseApp, GroupStorage {
         } else if (operationType == TYPE_UPDATE) {
             _updateGroupCallback(status, resourceId, callbackData);
         } else {
-            revert(string.concat("GroupApp: ", ERROR_INVALID_OPERATION));
+            revert("");
         }
     }
 
@@ -100,7 +100,7 @@ abstract contract GroupApp is BaseApp, GroupStorage {
      */
     function _createGroup(address _owner, string memory _groupName) internal virtual {
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("GroupApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IGroupHub(groupHub).createGroup{value: msg.value}(_owner, _groupName);
     }
 
@@ -125,7 +125,7 @@ abstract contract GroupApp is BaseApp, GroupStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("GroupApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IGroupHub(groupHub).createGroup{value: msg.value}(_owner, _groupName, _callbackGasLimit, _extraData);
     }
 
@@ -136,7 +136,7 @@ abstract contract GroupApp is BaseApp, GroupStorage {
      */
     function _deleteGroup(uint256 _tokenId) internal virtual {
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("GroupApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IGroupHub(groupHub).deleteGroup{value: msg.value}(_tokenId);
     }
 
@@ -160,7 +160,7 @@ abstract contract GroupApp is BaseApp, GroupStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("GroupApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IGroupHub(groupHub).deleteGroup{value: msg.value}(_tokenId, _callbackGasLimit, _extraData);
     }
 
@@ -187,7 +187,7 @@ abstract contract GroupApp is BaseApp, GroupStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("GroupApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IGroupHub(groupHub).updateGroup{value: msg.value}(updatePkg);
     }
 
@@ -225,7 +225,7 @@ abstract contract GroupApp is BaseApp, GroupStorage {
         });
 
         uint256 totalFee = _getTotalFee();
-        require(msg.value >= totalFee, string.concat("GroupApp: ", ERROR_INSUFFICIENT_VALUE));
+        require(msg.value >= totalFee, "");
         IGroupHub(groupHub).updateGroup{value: msg.value}(updatePkg, _callbackGasLimit, _extraData);
     }
 
