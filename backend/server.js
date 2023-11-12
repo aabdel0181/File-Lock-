@@ -59,24 +59,25 @@ app.post("/upload", upload.single("image"), async (req, res) => {
 });
 
 // Dummy function for saving files (Replace with your actual storage logic)
-async function saveFile(fileBuffer, type, acct, blur) {
+async function saveFile(fileBuffer, ftype, acct, blur) {
   const spInfo = await selectSp();
   // Logic to save file to your secure storage
-  console.log(`Saving ${type} file to secure storage.`);
+  console.log(`Saving ${ftype} file to secure storage.`);
 
   // create object example:
   const hashResult = await getCheckSums(fileBuffer);
   const { contentLength, expectCheckSums } = hashResult;
 
   console.log("creating the object....");
+  let createObjectTx;
   if (blur) {
-    const createObjectTx = await client.object.createObject(
+    createObjectTx = await client.object.createObject(
       {
         bucketName: "uncensored-cats",
         objectName: "test_blur",
         creator: acct,
         visibility: "VISIBILITY_TYPE_PUBLIC_READ",
-        fileType: fileType,
+        fileType: ftype,
         redundancyType: "REDUNDANCY_EC_TYPE",
         contentLength,
         expectCheckSums: JSON.parse(expectCheckSums),
@@ -87,13 +88,13 @@ async function saveFile(fileBuffer, type, acct, blur) {
       }
     );
   } else {
-    const createObjectTx = await client.object.createObject(
+    createObjectTx = await client.object.createObject(
       {
         bucketName: "censored-cats",
         objectName: "test_noBlur",
         creator: acct,
         visibility: "VISIBILITY_TYPE_PRIVATE",
-        fileType: fileType,
+        fileType: ftype,
         redundancyType: "REDUNDANCY_EC_TYPE",
         contentLength,
         expectCheckSums: JSON.parse(expectCheckSums),
@@ -148,11 +149,11 @@ app.post(
 
       saveFile(
         originalImageBuffer,
-        0,
+        req.files["originalImage"][0].mimetype,
         account,
-        req.files["originalImage"][0].mimetype
+        0
       );
-      saveFile(blurredImageBuffer, 1, account, "image/jpeg");
+      saveFile(blurredImageBuffer, "image/jpeg", account, 1);
 
       console.log(`Account: ${account}`);
       res
