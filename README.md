@@ -7,9 +7,9 @@ This decentralized app allows users to securely store data like images, PDFs, an
 ## Features
 
 - Upload images, PDFs, text files
-- Create blurred/abstracted versions of images  
+- Create SECURED blurred/abstracted versions of images  
 - Original files stored decentrally on IPFS
-- Mint NFTs to represent ownership over files
+- Mint documents to represent ownership over files
 - Manage and share uploaded data
 - Pay gas fees using BNB cryptocurrency
 
@@ -48,4 +48,6 @@ npm start
 
 ## Deployment 
 
-The frontend can be built and deployed as static files. The Express server will need to be hosted on a service like Heroku with CORS enabled. The smart contract is deployed on the following address: 0x82D021907dFaC0AAC7C3434dbD6Ed1AC104e538e.
+The frontend can be built and deployed as static files. The Express server will need to be hosted on a service like Heroku with CORS enabled. The smart contract is deployed on the following address: 0xD9D3c8e08bF83Dc97E7699c786BDcF608886406D.
+
+5. View Buckets in Dcellar (Object tx gets created and broadcasted) 
