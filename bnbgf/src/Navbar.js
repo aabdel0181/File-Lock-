@@ -19,6 +19,11 @@ const Navbar = () => {
             Marketplace
           </Link>
         </li>
+        {/* <li>
+            {account ? (
+            <p>Connected: {account}</p>
+          ) : null}
+        </li> */}
       </ul>
     </nav>
   );

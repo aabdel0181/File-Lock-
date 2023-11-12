@@ -2,7 +2,7 @@ import Navbar from "./Navbar";
 const Home = () => {
   return (
     <div>
-      <Navbar />
+      {/* <Navbar />   */}
       {/* Content of Home Page */}
     </div>
   );
