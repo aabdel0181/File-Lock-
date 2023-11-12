@@ -7,13 +7,18 @@ import {
 } from '@mui/material';
 import { Button, ButtonGroup } from '@mui/material';
 import { Link } from "react-router-dom";
+import { motion } from 'framer-motion';
 
 
 const Home = () => {
   const theme = useTheme();
 
   return (
-
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 1 }}
+    >
     <Container 
       sx={{
         height: '80vh',
@@ -43,7 +48,7 @@ const Home = () => {
       </Box>
       
     </Container>
-
+    </motion.div>
   );
 };
 

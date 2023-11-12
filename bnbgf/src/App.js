@@ -41,7 +41,6 @@ function App() {
       <Signin />
     : 
     <ThemeProvider theme={theme}>
-
       <BrowserRouter>
         <Navbar />
         <Routes>
