@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { Box } from '@mui/material';
+
 
 const ImageDataUpload = () => {
   const [imagePreview, setImagePreview] = useState("");
@@ -45,13 +47,16 @@ const ImageDataUpload = () => {
   };
 
   return (
-    <div className="mt-4">
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
-      />
+    <Box sx={{display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4}}>
+    <input
+      type="file"
+      accept="image/*"
+      onChange={handleImageChange}
+      className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+    />
+  <Box sx={{ gridColumn: '1 / 3', // span both cols
+  placeSelf: 'center' }}>
+    <div>
       {imagePreview && (
         <>
           <img
@@ -59,14 +64,10 @@ const ImageDataUpload = () => {
             alt="Preview"
             className="mt-3 max-w-xs max-h-64"
           />
-          <button
-            onClick={handleBlur}
-            className="mt-2 py-2 px-4 bg-green-500 text-white font-bold rounded hover:bg-green-600"
-          >
-            Blur
-          </button>
         </>
       )}
+      </div>
+      <div>
       {blurredImage && (
         <>
           <img
@@ -74,15 +75,29 @@ const ImageDataUpload = () => {
             alt="Blurred"
             className="mt-3 max-w-xs max-h-64"
           />
-          <button
-            onClick={handlePublish}
-            className="mt-2 py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600"
-          >
-            Publish
-          </button>
         </>
       )}
-    </div>
+      </div>   
+      </Box>
+      <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      {!blurredImage && imagePreview ?
+           <button
+           onClick={handleBlur}
+           className="mt-2 py-2 px-4 bg-green-500 text-white font-bold rounded hover:bg-green-600"
+         >
+           Blur
+         </button>
+         : blurredImage ?
+         <button
+             onClick={handlePublish}
+             className="mt-2 py-2 px-4 bg-blue-500 text-white font-bold rounded hover:bg-blue-600"
+           >
+             Publish
+           </button> :
+           <></>
+         }
+         </Box>
+         </Box>
   );
 };
 

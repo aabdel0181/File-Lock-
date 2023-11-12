@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Document, Page } from "react-pdf";
 
+
 // Set worker
 import { pdfjs } from "react-pdf";
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
@@ -23,14 +24,14 @@ const PdfDataUpload = () => {
   };
 
   return (
-    <div className="mt-5 flex">
+    <div className="mt-5">
       <div className="w-1/2 flex flex-col items-start ml-2">
         <input
           type="file"
           accept=".pdf"
           onChange={handleFileChange}
-          className="mb-2"
-        />
+          className="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+          />
         {file && (
           <>
             <div className="flex items-center mb-2">

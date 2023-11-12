@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import Typography from '@mui/material/Typography';
+import Divider from '@mui/material/Divider';
 
 const Navbar = () => {
   return (
-    <nav className="bg-gray-800 p-4" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      <ul className="flex space-x-4" >
+    <nav className="bg-gray-800 p-6" sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <ul className="flex space-x-10" >
         <li>
-          
           <Link to="/" className="text-white">
           <Typography variant="h7" component="div" sx={{ flexGrow: 1 }}>
             Home
